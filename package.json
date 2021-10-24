@@ -2,7 +2,7 @@
   "name": "subtitles-knife",
   "version": "0.0.1",
   "author": "ovack <youfengtec@gmail.com>",
-  "description": "A simple tool to handle subtitles",
+  "description": "A simple tool to handle jianyin subtitles",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -48,7 +48,8 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "target": "nsis"
     },
     "linux": {
       "icon": "build/icons"
@@ -84,7 +85,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^2.0.4",
-    "electron-builder": "^20.19.2",
+    "electron-builder": "^22.11.7",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^4.19.1",

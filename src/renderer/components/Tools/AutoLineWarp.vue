@@ -37,7 +37,7 @@
         platform: require('os').platform(),
         vue: require('vue/package.json').version,
         textArrays: [],
-        splitArrays: ['，', '。', '？', '\r', '\n', '！', '；', ',', '.', '?', '!', ';'],
+        splitArrays: ['，', '。', '？', '\r', '\n', '！', '；', ',', '?', '!', ';'],
         trimArr: ['*']
       }
     },

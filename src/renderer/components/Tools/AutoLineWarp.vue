@@ -1,24 +1,40 @@
 <template>
-  <div class="autoline-main">
-    <div class="content-area">
-      <el-input
-        type="textarea"
-        :rows="20"
-        placeholder="请输入需要换行的文本"
-        v-model="handletext">
-      </el-input>
-    </div>
-    <div class="tool-area">
-      <el-button type="primary" round @click="processBtnClick">处理</el-button>
-    </div>
-    <div class="content-area">
-      <el-input
-        type="textarea"
-        :rows="20"
-        placeholder="请在左侧输入需要换行的文本"
-        v-model="newtext">
-      </el-input>
-    </div>
+  <div class="main">
+    <el-container>
+      <el-header>
+        <div>
+          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllSplitElementsChange">换行标记</el-checkbox>
+          <div style="margin: 15px 0;"></div>
+          <el-checkbox-group v-model="splitArrays" @change="handleCheckedSplitElementsChange">
+            <el-checkbox v-for="element in splitElements" :label="element" :key="element">{{toString(element)}}</el-checkbox>
+          </el-checkbox-group>
+        </div>
+      </el-header>
+      <el-main>
+        <div class="autoline-main">
+          <div class="content-area">
+            <el-input
+              type="textarea"
+              :rows="20"
+              placeholder="请输入需要换行的文本"
+              v-model="handletext">
+            </el-input>
+          </div>
+          <div class="tool-area">
+            <el-button type="primary" round @click="processBtnClick">处理</el-button>
+          </div>
+          <div class="content-area">
+            <el-input
+              type="textarea"
+              :rows="20"
+              placeholder="请在左侧输入需要换行的文本"
+              v-model="newtext">
+            </el-input>
+          </div>
+        </div>
+      </el-main>
+    </el-container>
+
 
   </div>
 </template>
@@ -37,11 +53,29 @@
         platform: require('os').platform(),
         vue: require('vue/package.json').version,
         textArrays: [],
+        isIndeterminate: true,
+        checkAll: false,
         splitArrays: ['，', '。', '？', '\r', '\n', '！', '；', ',', '?', '!', ';'],
+        splitElements: ['，', '。', '？', '\r', '\n', '！', '；', ',', '?', '!', ';', '.'],
         trimArr: ['*']
       }
     },
     methods: {
+      handleCheckedSplitElementsChange (val) {
+      },
+      handleCheckAllSplitElementsChange (val) {
+        this.splitArrays = val ? this.splitElements : []
+        this.isIndeterminate = false
+      },
+      toString (item) {
+        if (item === '\r') {
+          return '"换行r"'
+        } else if (item === '\n') {
+          return '"换行n"'
+        } else {
+          return '"' + item + '"'
+        }
+      },
       processBtnClick () {
         let that = this
         that.newtext = 'handled'
@@ -71,6 +105,8 @@
 </script>
 
 <style scoped lang="scss">
+  .el-header, .el-footer {
+  }
   .autoline-main {
     width: 100%;
     display: flex;

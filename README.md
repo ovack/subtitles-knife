@@ -3,9 +3,9 @@
 > 处理剪印字幕
 
 
-[subtitle](https://github.com/ovack/subtitles-knife/blob/master/static/subtitle.png?raw=true)
+![subtitle](https://github.com/ovack/subtitles-knife/blob/master/static/subtitle.png?raw=true)
 
-[autowarp](https://github.com/ovack/subtitles-knife/blob/master/static/autowarp.png?raw=true)
+![autowarp](https://github.com/ovack/subtitles-knife/blob/master/static/autowarp.png?raw=true)
 
 #### 已实现功能
 - [x]字幕提取

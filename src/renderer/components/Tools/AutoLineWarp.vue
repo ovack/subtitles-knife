@@ -1,13 +1,16 @@
 <template>
   <div class="main">
     <el-container>
-      <el-header>
+      <el-header height="125px">
         <div>
           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllSplitElementsChange">换行标记</el-checkbox>
           <div style="margin: 15px 0;"></div>
           <el-checkbox-group v-model="splitArrays" @change="handleCheckedSplitElementsChange">
             <el-checkbox v-for="element in splitElements" :label="element" :key="element">{{toString(element)}}</el-checkbox>
           </el-checkbox-group>
+          <el-input v-model="maxLength" style="margin-top: 20px">
+            <template slot="prepend">单行最大字数</template>
+          </el-input>
         </div>
       </el-header>
       <el-main>
@@ -57,7 +60,8 @@
         checkAll: false,
         splitArrays: ['，', '。', '？', '\r', '\n', '！', '；', ',', '?', '!', ';'],
         splitElements: ['，', '。', '？', '\r', '\n', '！', '；', ',', '?', '!', ';', '.'],
-        trimArr: ['*']
+        trimArr: ['*'],
+        maxLength: 50
       }
     },
     methods: {
@@ -88,6 +92,10 @@
             if (tempStr.length > 0) {
               textArrays.push(trim(tempStr))
             }
+            tempStr = ''
+          } else if (tempStr.length > that.maxLength - 2) {
+            tempStr += value
+            textArrays.push(trim(tempStr))
             tempStr = ''
           } else {
             if (!that.trimArr.includes(value)) {
